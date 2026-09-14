@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>抖音公开评论采集器</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="eyebrow">本地操作页 · 仅监听本机</p>
+      <h1>抖音公开评论采集器</h1>
+      <p class="subtitle">仅采集浏览器中公开可见的数据，不绕过登录、验证码或风控。</p>
+    </header>
+
+    <section class="card">
+      <label for="urls">视频链接 <span>每行一个</span></label>
+      <textarea id="urls" rows="7" placeholder="https://www.douyin.com/video/……&#10;https://www.douyin.com/video/……"></textarea>
+      <div class="grid">
+        <label>最多采集评论数
+          <input id="max-comments" type="number" min="1" max="100000" value="20">
+        </label>
+        <fieldset>
+          <legend>导出格式</legend>
+          <label><input class="format" type="checkbox" value="csv" checked> CSV</label>
+          <label><input class="format" type="checkbox" value="xlsx"> Excel</label>
+          <label><input class="format" type="checkbox" value="jsonl"> JSONL</label>
+        </fieldset>
+      </div>
+      <div class="checks">
+        <label><input id="replies" type="checkbox"> 展开并采集公开可见回复</label>
+        <label><input id="anonymize" type="checkbox"> 匿名化评论昵称</label>
+        <label><input id="headless" type="checkbox"> 无界面运行（已有登录会话时可用）</label>
+      </div>
+      <div class="login-box">
+        <label><input id="manual-login" type="checkbox"> 先在弹出的 Edge 中手动登录</label>
+        <label>登录等待秒数
+          <input id="login-wait" type="number" min="30" max="900" value="120">
+        </label>
+        <p>勾选后会打开可见 Edge。请按正常流程登录；等待结束后程序自动继续。登录与无界面模式不能同时使用。</p>
+      </div>
+      <label class="salt-label">匿名化盐值（可选，建议研究项目填写并自行保管）
+        <input id="salt" type="password" autocomplete="off" placeholder="不填写则仍可匿名化，但跨项目稳定性较弱">
+      </label>
+      <button id="start" type="button">开始采集</button>
+      <p id="error" class="error" aria-live="polite"></p>
+    </section>
+
+    <section id="progress" class="card hidden">
+      <div class="status-line"><h2>运行状态</h2><span id="status" class="badge">准备中</span></div>
+      <p id="hint"></p>
+      <pre id="logs" aria-live="polite"></pre>
+      <div id="downloads" class="downloads"></div>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>

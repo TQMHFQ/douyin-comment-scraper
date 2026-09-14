@@ -1,0 +1,25 @@
+# 只把你在公开页面、手动登录后通过 --probe-comments 确认的选择器填入这里。
+# 当前抖音未登录时不渲染公开评论，因此示例不预设未经验证的评论选择器。
+browser:
+  profile_dir: data/browser_profile
+  slow_mo_ms: 0
+crawl:
+  min_delay_seconds: 1.2
+  max_delay_seconds: 2.5
+  max_stagnant_rounds: 3
+  scroll_wait_ms: 1200
+comments:
+  # 2026-09-10 在公开桌面视频页实测。
+  item_selector: '[data-e2e="comment-item"]'
+  # 登录后如能区分回复节点，可单独填入；会写入 comment_level=回复。
+  reply_item_selector: ""
+  # 已验证后可填，例如 data-id；留空时 comment_id 保持为空。
+  id_attribute: ""
+  user_selector: '[data-click-from="title"]'
+  text_selector: ""
+  time_selector: ""
+  like_selector: ""
+  reply_count_selector: ""
+  # 回复的父评论 ID。只有页面公开给出时才配置；否则字段保留为空。
+  parent_id_selector: ""
+  parent_id_attribute: ""
